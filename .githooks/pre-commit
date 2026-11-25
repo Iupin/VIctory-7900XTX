@@ -1,3 +1,5 @@
 #!/bin/sh
-# Enforces the asset policy on every commit. Install with: cargo xtask install-hooks
-exec cargo xtask policy --staged
+# Enforces the asset policy, then the code maps in docs/agents/, on every commit.
+# Install with: cargo xtask install-hooks
+cargo xtask policy --staged || exit 1
+exec cargo xtask docs
