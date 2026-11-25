@@ -58,6 +58,19 @@ cargo xtask docs            # the code maps agree with the code
 cargo xtask install-hooks   # once per clone: both checks before every commit
 ```
 
+After a change to the shader translator (`crates/victory-shader`, or anything in
+the shader cache key), a new build that changes pipelines, or a new GPU driver,
+warm up before running or measuring, or the first minutes are spent making
+pipelines (seconds a frame, thousands of draws dropped):
+
+```powershell
+target\diag\victory.exe shaders <the shader archives>   # every shader translated again, minutes
+target\diag\victory.exe warm --used                     # the pipelines earlier runs drew with
+```
+
+Both can be stopped and go on later. A measurement counts only once the frame
+line says `0 being made`.
+
 Details, and what CI does not cover: `docs/agents/tooling.md`. Running the
 title: `README.md` and `docs/agents/app-victory.md`. Whether a change made the
 picture or the frame time better can only be judged on the owner's machine with
