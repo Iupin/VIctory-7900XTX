@@ -28,6 +28,7 @@ jobs:
         run: cargo clippy --workspace --all-targets --locked -- -D warnings
       - name: Clippy, diagnostics build
         run: cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
-      # Includes xtask's repository_passes_policy, the asset-policy check.
+      # Includes xtask's repository_passes_policy (the asset-policy check) and
+      # repository_docs_are_current (the docs/agents/ code-map check).
       - name: Tests
         run: cargo test --workspace --locked

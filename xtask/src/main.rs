@@ -1,5 +1,6 @@
 //! Repository maintenance. Run with `cargo xtask <command>`.
 
+mod docs;
 mod policy;
 
 use std::path::{Path, PathBuf};
@@ -24,7 +25,10 @@ enum Cmd {
         #[arg(long)]
         staged: bool,
     },
-    /// Point git at .githooks/ so every commit runs the policy check.
+    /// Check the code maps in docs/agents/: every source file named, no stale
+    /// paths, every environment switch in docs/agents/switches.md and no others.
+    Docs,
+    /// Point git at .githooks/ so every commit runs the policy and docs checks.
     InstallHooks,
 }
 
@@ -32,6 +36,7 @@ fn main() -> Result<()> {
     let root = workspace_root();
     match Cli::parse().command {
         Cmd::Policy { staged } => policy::run(&root, staged),
+        Cmd::Docs => docs::run(&root),
         Cmd::InstallHooks => {
             let status = Command::new("git")
                 .args(["config", "core.hooksPath", ".githooks"])
@@ -42,7 +47,9 @@ fn main() -> Result<()> {
                 status.success(),
                 "git config failed (is this a git repository?)"
             );
-            println!("hooks installed: commits now run `cargo xtask policy --staged`");
+            println!(
+                "hooks installed: commits now run `cargo xtask policy --staged` and `cargo xtask docs`"
+            );
             Ok(())
         }
     }

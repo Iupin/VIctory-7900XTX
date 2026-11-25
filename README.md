@@ -43,7 +43,7 @@ model 6.6 and mesh shaders, Rust (the toolchain is pinned), the MSVC build
 tools, and your own dump of the title.
 
 ```powershell
-git clone https://github.com/avatarmanz/VIctory-7900XTX
+git clone https://github.com/Iupin/VIctory-7900XTX
 cd VIctory-7900XTX
 copy victory.example.toml victory.toml      # then set your paths, outside this folder
 cargo build --locked --profile diag -p victory --features diagnostics
@@ -63,6 +63,10 @@ target\diag\victory.exe warm --used                     # pipelines earlier runs
 Commands, debugging switches and upstream's own description:
 [docs/README-fxceless.md](docs/README-fxceless.md). Every `VICTORY_...` switch is
 described in a comment where it is read.
+
+For people and agents changing the code: [AGENTS.md](AGENTS.md) has the rules
+(assets, history, credits) and points to a map of every crate and a list of every
+switch under [docs/agents](docs/agents).
 
 ## What is different here
 
@@ -94,6 +98,9 @@ commits taken from elsewhere name the commit and its author.
 - **[VIctory](https://github.com/Marvisak/VIctory)** by Marvisak and its
   contributors: the loader, the runtime services, the Direct3D 12 back end and
   the shader recompiler.
+- **[avatarmanz/VIctory-7900XTX](https://github.com/avatarmanz/VIctory-7900XTX)**: the
+  repository this one is a fork of and builds on; the RX 7900 XTX work described
+  above was done there.
 - **[fxceless/victory-fork](https://github.com/fxceless/victory-fork)**: the fork
   this one started from, and the people whose pull requests it carries.
 - **[DexNom/VIctory](https://github.com/DexNom/VIctory)**: ray tracing fixes,
